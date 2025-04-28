@@ -1,2 +1,1 @@
-# adopet-rs
-# adopet-rs
+# Adopet  - Pet Recommendation System using Weighted Content-Based Filtering
