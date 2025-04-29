@@ -1,8 +1,6 @@
 import pandas as pd
-import numpy as np
-from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
-from sklearn.metrics.pairwise import cosine_similarity
-from pipeline import TransformationPipeline
+from defaultPipeline import TransformationPipeline
+from model import ContentBasedFiltering
 
 pets = [
     "dog",
@@ -12,7 +10,7 @@ pets = [
     "reptile",
 ]
 
-user_data = [[1, ["dog", "rabbit"], "small", "Yes", "750-999", "Yes"]]
+user_data = [[1, ["dog", "rabbit"], "small", "yes", "750-999", "yes"]]
 user_df = pd.DataFrame(
     user_data,
     columns=["id", "animal", "size", "isActive", "expenseRange", "goodWithKids"],
@@ -53,38 +51,28 @@ pets_df = pd.DataFrame(
     ],
 )
 
-user_df = TransformationPipeline(
-    pets, user_df, ["animal"], ["size", "isActive", "expenseRange", "goodWithKids"]
+user_pipe = TransformationPipeline(
+    pets, ["animal"], ["size", "isActive", "expenseRange", "goodWithKids"]
 ).pipeline()
 
-print(user_df)
+pets_pipe = TransformationPipeline(
+    pets,
+    ["animal", "species"],
+    ["size", "isActive", "expenseRange", "goodWithKids"],
+).pipeline()
 
 
-# weights = [
-#     0.6,
-#     0.6,
-#     0.6,
-#     0.6,
-#     0.6,
-#     1.0,
-#     1.0,
-#     1.0,
-#     0.2,
-#     0.2,
-#     0.8,
-#     0.8,
-#     0.8,
-#     0.4,
-#     0.4,
-# ]
-# user_df = user_df * weights
-# pets_df = pets_df * weights
-# cs = cosine_similarity(user_df, pets_df)
+user_transformed = user_pipe.fit_transform(user_df)
+# pets_transformed = pets_pipe.fit_transform(pets_df)
 
-# res = {"ids": [], "similarity": []}
-# for i, similarity in enumerate(cs.reshape((-1))):
-#     if similarity > 0.55:
-#         res["ids"].append(i + 1)
-#         res["similarity"].append(similarity)
+print(f"USER: {user_transformed}")
+# print(f"PETS: {pets_transformed.shape}")
 
-# print(res)
+# recommender = ContentBasedFiltering(
+#     user_profile=user_transformed, items_profile=pets_transformed
+# )
+# recommender.similarityVector()
+# recommended_pets = recommender.returnMatches(threshold=0.55)
+
+# print("Recommended pet IDs:", recommended_pets["ids"])
+# print("Similarity scores:", recommended_pets["similarity"])

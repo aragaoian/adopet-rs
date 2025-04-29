@@ -1,34 +1,30 @@
-from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 from sklearn.pipeline import Pipeline
-from typing import List
 import pandas as pd
-
-
-class CustomFunctionTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, func):
-        self.func = func
-
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X):
-        return self.func(X)
+from typing import List
+from utils import CustomFunctionTransformer
 
 
 class TransformationPipeline:
     def __init__(
         self,
         petsList: List[str],
-        df,
         cols_to_drop: List[str],
         categorical_cols: List[str],
     ):
-        self.df = df
         self.pets = petsList
         self.cols_to_drop = cols_to_drop
         self.categorical_cols = categorical_cols
-        self.ohe = OneHotEncoder(sparse_output=False, handle_unknown="ignore")
+        self.encoder = OneHotEncoder(
+            sparse_output=False,
+            handle_unknown="ignore",
+            categories=[
+                ["small", "medium", "big"],
+                ["yes", "no"],
+                ["200-499", "500-749", "750-999", "1000+"],
+                ["yes", "no"],
+            ],
+        )
         self.scaler = MinMaxScaler()
 
     def oneHotEncodeAnimals(self, X):
@@ -38,29 +34,39 @@ class TransformationPipeline:
         return X
 
     def oneHotEncodeCols(self, X):
-        self.ohe.fit(X)
-        df_encoded = self.ohe.transform(X)  # arrumar aqui
+        self.encoder.fit(X[self.categorical_cols])
+        df_encoded = self.encoder.transform(X[self.categorical_cols])  # arrumar aqui
 
         one_hot_df = pd.DataFrame(
             df_encoded,
-            columns=self.ohe.get_feature_names_out(self.categorical_cols),
+            columns=self.encoder.get_feature_names_out(self.categorical_cols),
             index=X.index,
         )
-        print(one_hot_df)
 
         X = pd.concat([X.drop(self.categorical_cols, axis=1), one_hot_df], axis=1)
         return X
 
+    def finalTransform(self, X):
+        print(f"Columns before final transform: {X.columns.tolist()}\n")
+        print(f"BEFORE: \n{X}\n\n")
+        if "id" in X.columns:
+            X = X.drop("id", axis=1)
+        if X.shape[1] > 15:
+            print(f"Warning: Too many columns ({X.shape[1]}), keeping only first 15\n")
+            X = X.iloc[:, :15]
+        elif X.shape[1] < 15:
+            print(f"Warning: Not enough columns ({X.shape[1]}), expected 15\n")
+        return X
+
     def pipeline(self):
-        pipe = Pipeline(
+        return Pipeline(
             [
                 (
                     "animals_encoding",
                     CustomFunctionTransformer(self.oneHotEncodeAnimals),
                 ),
                 ("cat_cols_encoding", CustomFunctionTransformer(self.oneHotEncodeCols)),
+                ("final_transform", CustomFunctionTransformer(self.finalTransform)),
                 ("scaler", self.scaler),
             ]
         )
-
-        return pipe.fit_transform(self.df)
