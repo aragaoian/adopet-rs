@@ -1,9 +1,8 @@
-from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.metrics.pairwise import cosine_similarity
 
 
 class ContentBasedFiltering:
-    def __init__(self, user_profile, items_profile, threshold: float = 0.75):
+    def __init__(self, user_profile, items_profile, threshold: float = 0.85):
         self.user_profile = user_profile.to_numpy()
         self.items_profile = items_profile.to_numpy()
         self.w = [

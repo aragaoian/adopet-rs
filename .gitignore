@@ -1,5 +1,8 @@
-myenv/
-pycache/
+# Enviroments
 .env
+myenv/
+
+# Cache
+pycache/
 __pycache__
 /__pycache__
