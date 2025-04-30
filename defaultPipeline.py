@@ -29,7 +29,7 @@ class TransformationPipeline:
 
     def oneHotEncodeAnimals(self, X):
         for animal in self.pets:
-            X[animal] = X["animal"].apply(lambda x: 1 if animal in x else 0)
+            X[animal] = X["animal"].apply(lambda x: 1.0 if animal in x else 0.0)
         X = X.drop(self.cols_to_drop, axis=1)[X.drop(self.cols_to_drop, axis=1).columns]
         return X
 
@@ -47,15 +47,10 @@ class TransformationPipeline:
         return X
 
     def finalTransform(self, X):
-        print(f"Columns before final transform: {X.columns.tolist()}\n")
-        print(f"BEFORE: \n{X}\n\n")
         if "id" in X.columns:
             X = X.drop("id", axis=1)
-        if X.shape[1] > 15:
-            print(f"Warning: Too many columns ({X.shape[1]}), keeping only first 15\n")
-            X = X.iloc[:, :15]
-        elif X.shape[1] < 15:
-            print(f"Warning: Not enough columns ({X.shape[1]}), expected 15\n")
+        if X.shape[1] > 16:
+            X = X.iloc[:, :16]
         return X
 
     def pipeline(self):
@@ -67,6 +62,5 @@ class TransformationPipeline:
                 ),
                 ("cat_cols_encoding", CustomFunctionTransformer(self.oneHotEncodeCols)),
                 ("final_transform", CustomFunctionTransformer(self.finalTransform)),
-                ("scaler", self.scaler),
             ]
         )
