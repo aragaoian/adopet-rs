@@ -1,5 +1,5 @@
 # Adopet  - Pet Recommendation System
-Recommender System based on feature weighted Content-Based Filtering. 
-Developed in the Software Engineering II class for an extension project, aiming to impact the comunity using knowlodge aquired during the university.
-</br> </br>
-Our main goal is to help adopters find their best buddy and to reduce adoption issues such as pet abandoment. We do this based on questions asked during the register stage.
+Recommender System Based on Feature-Weighted Content-Based Filtering
+Developed during the Software Engineering II course as part of an extension project, this system aims to positively impact the community by applying knowledge acquired at the university. </br>
+
+Our main goal is to help adopters find their ideal companion and reduce common adoption issues, such as pet abandonment. We achieve this by using information gathered through a questionnaire completed during the registration process.
