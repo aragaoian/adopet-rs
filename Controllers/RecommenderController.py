@@ -9,8 +9,11 @@ from fastapi import HTTPException
 import numpy as np
 
 
-def index(userId: str):
-    adoptantData = userData(userId)
+def index(user_id: str):
+    if not user_id.isalnum() or user_id.length() != 20:
+        raise HTTPException(status_code=401, detail="User_id is malformed")
+
+    adoptantData = userData(user_id)
     if adoptantData.empty:
         raise HTTPException(status_code=404, detail="User not found")
 
@@ -29,9 +32,7 @@ def index(userId: str):
     values = list(recommended_pets.values())
     values_f = [float(item) for arr in values for item in arr]
     indexes = np.argsort(values_f)[::-1]
-    sortedSimilarities = {keys[i]: values[i] for i in indexes}
-
-    print(sortedSimilarities)
+    sorted_similarities = {keys[i]: values[i] for i in indexes}
 
     # response = {"recommendedPets": []}
     # for petObj in sortedSimilarities:

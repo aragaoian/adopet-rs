@@ -40,7 +40,7 @@ class TransformationPipeline:
 
     def oneHotEncodeCols(self, X):
         self.encoder.fit(X[self.categorical_cols].astype(str))
-        df_encoded = self.encoder.transform(X[self.categorical_cols])  # arrumar aqui
+        df_encoded = self.encoder.transform(X[self.categorical_cols])
 
         one_hot_df = pd.DataFrame(
             df_encoded,
