@@ -6,3 +6,6 @@ myenv/
 pycache/
 __pycache__
 /__pycache__
+
+# Test files
+test.py

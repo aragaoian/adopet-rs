@@ -1,8 +1,8 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter
 from Controllers import RecommenderController
-from fastapi import HTTPException
 
 router = APIRouter()
+
 
 @router.get("/recommendations/{user_id}")
 async def index(user_id: str):
