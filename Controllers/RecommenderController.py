@@ -9,7 +9,7 @@ from fastapi import HTTPException
 
 
 def index(user_id: str):
-    if not user_id.isalnum() or user_id.length() != 20:
+    if not user_id.isalnum() or len(user_id) != 24:
         raise HTTPException(status_code=400, detail="User_id is malformed")
 
     adoptantData = userData(user_id)
@@ -21,7 +21,9 @@ def index(user_id: str):
     pets_transformed = pets_pipe.fit_transform(pets)
 
     recommender = ContentBasedFiltering(  # modelo de recomendação
-        user_profile=user_transformed, items_profile=pets_transformed
+        user_profile=user_transformed,
+        items_profile=pets_transformed,
+        items_not_piped=pets,
     )
     recommender.similarityVector()
     recommended_pets = recommender.returnSimilarities()
@@ -34,6 +36,6 @@ def index(user_id: str):
 
     response = {"recommendedPets": []}
     for recommended_pet in thresholded_recommendations:
-        response["recommendedPets"].append(recommended_pet["id"])
+        response["recommendedPets"].append(recommended_pet)
 
     return response
