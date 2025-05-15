@@ -3,9 +3,10 @@ import numpy as np
 
 
 class ContentBasedFiltering:
-    def __init__(self, user_profile, items_profile):
+    def __init__(self, user_profile, items_profile, items_not_piped):
         self.user_profile = user_profile
         self.items_profile = items_profile
+        self.items_not_piped = items_not_piped
         self.cs = 0
         self.weights = (
             (
@@ -84,16 +85,16 @@ class ContentBasedFiltering:
             ),
             self.calcFeaturesWeigth(
                 features=[
-                    "isActive_true",
-                    "isActive_false",
+                    "isActive_True",
+                    "isActive_False",
                 ],
                 augmentor=1,
                 reductor=0.5,
             ),
             self.calcFeaturesWeigth(
                 features=[
-                    "expenseRange_250-499",
-                    "expenseRange_450-749",
+                    "expenseRange_200-499",
+                    "expenseRange_500-749",
                     "expenseRange_750-999",
                     "expenseRange_1000+",
                 ],
@@ -102,7 +103,7 @@ class ContentBasedFiltering:
                 lower_bound_feature=True,
             ),
             self.calcFeaturesWeigth(
-                features=["isGoodWithKids_true", "isGoodWithKids_false"],
+                features=["isGoodWithKids_True", "isGoodWithKids_False"],
                 augmentor=1,
                 reductor=0.5,
             ),
@@ -110,10 +111,14 @@ class ContentBasedFiltering:
         return np.hstack(weightVector).reshape(-1, 1)  # retornar um vetor de colunas
 
     def similarityVector(self):
-        user_vector = self.user_profile.to_numpy() * self.weights
-        items_vector = self.items_profile.to_numpy() * self.weights
-        self.cs = cosine_similarity(user_vector, items_vector)
+        user_vector = self.user_profile.to_numpy() * self.weights.T  # shape (1, 16)
+        items_vector = (
+            self.items_profile.to_numpy() * self.weights.ravel()
+        )  # shape (N, 16)
+
+        similarity = cosine_similarity(user_vector, items_vector)  # shape (1, N)
+        self.cs = similarity.T  # shape (N, 1)
 
     def returnSimilarities(self):
-        self.items_profile["similarities"] = self.cs
-        return self.items_profile
+        self.items_not_piped["similarities"] = self.cs
+        return self.items_not_piped

@@ -3,10 +3,10 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+load_dotenv(encoding="utf-8")
 
 # Conexão com o banco de dados
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DB_URL")
 engine = create_engine(DATABASE_URL)
 
 # Criar sessão
