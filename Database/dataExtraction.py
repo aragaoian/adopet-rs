@@ -1,6 +1,6 @@
 from sqlalchemy import select
 import pandas as pd
-from dbEngineSession import Session, metadata
+from Database.dbEngineSession import Session, metadata
 from Recommender.defaultPipeline import TransformationPipeline
 
 user = metadata.tables["User"]

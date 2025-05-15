@@ -21,7 +21,7 @@ class TransformationPipeline:
             sparse_output=False,
             handle_unknown="ignore",
             categories=[
-                ["small", "medium", "big"],
+                ["small", "medium", "large"],
                 [True, False],
                 ["200-499", "500-749", "750-999", "1000+"],
                 [True, False],
@@ -32,7 +32,6 @@ class TransformationPipeline:
     def oneHotEncodeAnimals(
         self, X
     ):  # formatar as prefêrencias de animais do adotante no modelo OHE
-        print(self.pets)
         for specie in self.pets:
             X[specie] = X["petPreference" if self.isUser else "specieName"].apply(
                 lambda x: 1.0 if specie in x else 0.0

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
-from Routers.RecommenderRouter import index
+from Routers import RecommenderRouter
 from Utils.validateToken import validateToken
 
 app = FastAPI()
 
-app.include_router(index, dependencies=[Depends(validateToken)])
+app.include_router(RecommenderRouter.router, dependencies=[Depends(validateToken)])
