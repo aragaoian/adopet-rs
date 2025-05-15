@@ -5,13 +5,13 @@ import os
 
 load_dotenv()
 
-# Database connection setup
+# Conexão com o banco de dados
 DATABASE_URL = os.getenv("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 
-# Creating a session
+# Criar sessão
 Session = sessionmaker(bind=engine)
 
-# Creat MetaData Object
+# Criar objeto de MetaData
 metadata = MetaData()
 metadata.reflect(bind=engine)

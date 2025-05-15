@@ -29,7 +29,9 @@ class TransformationPipeline:
         )
         self.scaler = MinMaxScaler()
 
-    def oneHotEncodeAnimals(self, X):
+    def oneHotEncodeAnimals(
+        self, X
+    ):  # formatar as prefêrencias de animais do adotante no modelo OHE
         print(self.pets)
         for specie in self.pets:
             X[specie] = X["petPreference" if self.isUser else "specieName"].apply(
@@ -38,9 +40,9 @@ class TransformationPipeline:
         X = X.drop(self.cols_to_drop, axis=1)[X.drop(self.cols_to_drop, axis=1).columns]
         return X
 
-    def oneHotEncodeCols(self, X):
+    def oneHotEncodeCols(self, X):  # usar OHE para colunas categoricas
         self.encoder.fit(X[self.categorical_cols].astype(str))
-        df_encoded = self.encoder.transform(X[self.categorical_cols])  # arrumar aqui
+        df_encoded = self.encoder.transform(X[self.categorical_cols])
 
         one_hot_df = pd.DataFrame(
             df_encoded,

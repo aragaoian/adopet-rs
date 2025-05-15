@@ -59,7 +59,3 @@ pets_pipe = TransformationPipeline(
     ["specieName"],
     ["size", "isActive", "expenseRange", "isGoodWithKids"],
 ).pipeline()
-
-
-user_transformed = user_pipe.fit_transform(userData("zegs8twq9mbs0abccpbcxjj2"))
-pets_transformed = pets_pipe.fit_transform(petsData())
