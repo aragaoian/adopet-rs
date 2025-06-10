@@ -38,4 +38,5 @@ def index(user_id: str):
     for recommended_pet in thresholded_recommendations:
         response["recommendedPets"].append(recommended_pet)
 
+    response["recommendedPets"][:10]  # limitar a 10
     return response

@@ -23,7 +23,7 @@ class TransformationPipeline:
             categories=[
                 ["small", "medium", "large"],
                 [True, False],
-                ["200-499", "500-749", "750-999", "1000+"],
+                ["250-499", "500-749", "750-999", "1000+"],
                 [True, False],
             ],
         )

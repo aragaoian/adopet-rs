@@ -93,7 +93,7 @@ class ContentBasedFiltering:
             ),
             self.calcFeaturesWeigth(
                 features=[
-                    "expenseRange_200-499",
+                    "expenseRange_250-499",
                     "expenseRange_500-749",
                     "expenseRange_750-999",
                     "expenseRange_1000+",

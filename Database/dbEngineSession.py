@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 import os
 
-load_dotenv(encoding="utf-8")
+load_dotenv()
 
 # Conexão com o banco de dados
 DATABASE_URL = os.getenv("DB_URL")
