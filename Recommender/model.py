@@ -73,7 +73,7 @@ class ContentBasedFiltering:
     def calcWeights(self):  # centralizar e vetorizar os pesos
         weightVector = [
             self.calcFeaturesWeigth(
-                features=["dog", "cat", "bird", "rabbit", "reptile"],
+                features=["Cachorro", "Gato", "Ave", "Coelho", "Réptil"],
                 augmentor=1,
                 reductor=0.333,
             ),
