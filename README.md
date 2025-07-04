@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/2e3dd635-67e4-4bf1-b9af-d533e72d61bc)
+<img src="https://github.com/user-attachments/assets/1c2c759e-476f-424e-8faf-e42364d2be33" alt="Adopet Logo">
 
 # About
 
