@@ -18,4 +18,10 @@ Adopet Pet Recommendation System Based is based on **Feature-Weighted Content-Ba
 - [**FastAPI**](https://fastapi.tiangolo.com/) - High-performance web framework for building APIs with automatic OpenAPI docs. Based on Pydantic & Starlette.
 - [**SQLAlchemy**](https://docs.sqlalchemy.org/) - Powerful SQL toolkit and Object-Relational Mapping (ORM) library for Python.
 
+# Contributions
+
+# Other
+- [**Adopet Back-end**](https://github.com/lucaslosekann/adopet-backend)
+- [**Adopet Front-end**](https://github.com/lucaslosekann/adopet-frontend)
+
 
