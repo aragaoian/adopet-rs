@@ -12,5 +12,10 @@ We achieve this by using machine learning techniques and information gathered th
 Adopet Pet Recommendation System Based is based on **Feature-Weighted Content-Based Filtering**, 
 
 # Built With
+- [**NumPy**](https://numpy.org/doc/) - Fundamental package for numerical computing with support for arrays, matrices, and mathematical operations.
+- [**Pandas**](https://pandas.pydata.org/docs/) - Powerful data structures for data manipulation and analysis, especially for tabular data (DataFrames).
+- [**Scikit-Learn**](https://scikit-learn.org/) - Widely used library for machine learning: classification, regression, clustering, dimensionality reduction, and more.
+- [**FastAPI**](https://fastapi.tiangolo.com/) - High-performance web framework for building APIs with automatic OpenAPI docs. Based on Pydantic & Starlette.
+- [**SQLAlchemy**](https://docs.sqlalchemy.org/) - Powerful SQL toolkit and Object-Relational Mapping (ORM) library for Python.
 
 
