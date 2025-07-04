@@ -34,7 +34,7 @@ User Profille vector were multiplied by a vector of weigths to apply an augmento
 
 # Contributions
 
-This project and the others ones that are part of the Adopet enviroment, were build alongside with my university collegues:
+This project and the others ones that are part of the Adopet enviroment, were built alongside with my university collegues:
 - [**Lucas Losekann**](https://github.com/lucaslosekann)
 - [**João Fraga**](https://github.com/joaopedrofraga)
 - [**Maria Martim**](https://github.com/MariaMartim)
