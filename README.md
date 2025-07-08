@@ -7,23 +7,24 @@
   <p style="max-width: 600px;">
     <b>Adopet Rs</b>: A Feature-Weighted Content-Based filtering developed to decrease adopted pets abandonment and aid to democratize the adoption process
   </p>
-  <a href="adopet.top">
+  <a href="https://adopet.top/">
     adopet.top
   </a>
 </div>
 
 # About ADOPET
 
-Adopet was developed during the Software Engineering II course as part of an extension project. aiming to positively impact the community by applying knowledge acquired at the university. </br>
+ADOPET was developed during the Software Engineering II course as part of an extension project, with the goal of positively impacting the community by applying the knowledge acquired at the university. </br>
 
-After analyzing other pet adoption websites, we were engaged to create a pet adoption website to help adopters find their ideal companion and reduce common adoption issues, such as pet abandonment, by recommending pets based on the user preferences.
-We achieve this by using machine learning techniques and information gathered through a questionnaire completed during the registration process. 
+After analyzing other pet adoption platforms, we were motivated to create a website that helps adopters find their ideal companions while addressing common adoption challenges, such as pet abandonment. To tackle this, we implemented a recommendation system that suggests pets based on user preferences. </br>
+ 
+These preferences are collected through a questionnaire completed during the user registration process and are used to customize the recommendations using machine learning techniques.
 
 # Details
 
-Behind the scenes, a **Feature-Weighted Content-Based Filtering** approach was used, calculating the similarities with a cossine function and thus measuring how similar the user's and the item's profiles are. </br>
+Behind the scenes, ADOPET uses a **Feature-Weighted Content-Based Filtering** approach. Similarities between users and pets are calculated using the cosine similarity function, which measures how closely the user's profile aligns with each pet's characteristics. </br>
 
-User Profille vector were multiplied by a vector of weigths to apply an augmentor of importance to some features, such as expense range, animal preference and housing size. Moreover, lower bound features were also submited to a process of augmentation and reduction of their values, allowing the recommender to recommend a lower cost pet even if the user chose a higher expense range. 
+The user's profile vector is multiplied by a vector of feature weights to emphasize the importance of certain attributes (such as expense range, animal preference, and housing size). Additionally, features with lower-bound limits undergo a value adjustment process. This allows the system to, for example, recommend a more affordable pet even if the user initially selected a higher expense range, thus increasing the chances of successful adoption.
 
 # Built With
 - [**NumPy**](https://numpy.org/doc/) - Fundamental package for numerical computing with support for arrays, matrices, and mathematical operations.
@@ -34,7 +35,7 @@ User Profille vector were multiplied by a vector of weigths to apply an augmento
 
 # Contributions
 
-This project and the others ones that are part of the Adopet enviroment, were built alongside with my university collegues:
+This project and the other ones that are part of the ADOPET enviroment, were built alongside with my university collegues:
 - [**Lucas Losekann**](https://github.com/lucaslosekann)
 - [**João Fraga**](https://github.com/joaopedrofraga)
 - [**Maria Martim**](https://github.com/MariaMartim)
