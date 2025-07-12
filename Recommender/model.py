@@ -1,38 +1,54 @@
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
+# TODO
+# pesos dinamicos
+# diminuição gradual dos pesos no calcFeaturesWeigths
+
 
 class ContentBasedFiltering:
-    def __init__(self, user_profile, items_profile, items_not_piped):
-        self.user_profile = user_profile
-        self.items_profile = items_profile
+    def __init__(
+        self,
+        user_profile,
+        items_profile,
+        items_not_piped,
+        weigths=None,
+        test_weigths=False,
+    ):
+        self.user_profile = user_profile.copy()
+        self.items_profile = (
+            items_profile.copy()
+        )  # evitar incosistência nas transformações
         self.items_not_piped = items_not_piped
         self.cs = 0
-        self.weights = (
-            (
-                np.array(
-                    [
-                        0.6,
-                        0.6,
-                        0.6,
-                        0.6,
-                        0.6,
-                        1.0,
-                        1.0,
-                        1.0,
-                        0.2,
-                        0.2,
-                        0.8,
-                        0.8,
-                        0.8,
-                        0.8,
-                        0.4,
-                        0.4,
-                    ]
-                ).reshape(-1, 1)
-            )
-            * self.calcWeights()
-        )  # pesos personalizados resultado do produto escalar dos vetores para o cálculo dos
+        if not test_weigths:
+            self.weights = (
+                (
+                    np.array(
+                        [
+                            0.6,
+                            0.6,
+                            0.6,
+                            0.6,
+                            0.6,
+                            1.0,
+                            1.0,
+                            1.0,
+                            0.2,
+                            0.2,
+                            0.8,
+                            0.8,
+                            0.8,
+                            0.8,
+                            0.4,
+                            0.4,
+                        ]
+                    ).reshape(-1, 1)
+                )
+                * self.calcWeights()
+            )  # pesos personalizados resultado do produto escalar dos vetores para o cálculo dos
+        else:
+            self.weights = weigths * self.calcWeights()
 
     def calcFeaturesIdx(self, features):  # calcular os ids dos atributos selecionados
         return (
@@ -64,6 +80,10 @@ class ContentBasedFiltering:
                 res.append(augmentor)
             else:
                 if lower_bound_feature and idx < max(selectedFeaturesIdx):
+                    for row in range(len(self.items_profile)):
+                        # setar os atributos lower bound de user and items profile como 1 para permitir o fator redutor
+                        self.items_profile.iloc[row, idx] = 1
+                    self.user_profile.iloc[0, idx] = 1
                     res.append(reductor * 0.5)
                     continue
                 res.append(reductor)
@@ -116,8 +136,13 @@ class ContentBasedFiltering:
             self.items_profile.to_numpy() * self.weights.ravel()
         )  # shape (N, 16)
 
+        user_vector = user_vector / np.linalg.norm(user_vector)
+        items_vector = items_vector / np.linalg.norm(
+            items_vector, axis=1, keepdims=True
+        )
         similarity = cosine_similarity(user_vector, items_vector)  # shape (1, N)
         self.cs = similarity.T  # shape (N, 1)
+        return self.cs.ravel()
 
     def returnSimilarities(self):
         self.items_not_piped["similarities"] = self.cs
