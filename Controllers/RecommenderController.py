@@ -28,11 +28,9 @@ def index(user_id: str):
     recommender.similarityVector()
     recommended_pets = recommender.returnSimilarities()
 
-    thresholded_recommendations = (
-        recommended_pets[  # limitar a similaridades maiores que 0.85
-            recommended_pets["similarities"] > 0.85
-        ].sort_values("similarities", ascending=False)["id"]
-    )
+    thresholded_recommendations = recommended_pets[  # limitar a similaridades maiores que 0.50 (previamente com 0.85)
+        recommended_pets["similarities"] > 0.50
+    ].sort_values("similarities", ascending=False)["id"]
 
     response = {"recommendedPets": []}
     for recommended_pet in thresholded_recommendations:
