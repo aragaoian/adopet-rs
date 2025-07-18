@@ -5,7 +5,7 @@
     style="width: 50%; height: auto; margin-bottom: 10px;" 
   />
   <p style="max-width: 600px;">
-    <b>Adopet Rs</b>: A Feature-Weighted Content-Based filtering developed to decrease adopted pets abandonment and aid to democratize the adoption process
+    <b>ADOPET Rs</b>: A Feature-Weighted Content-Based filtering developed to decrease adopted pets abandonment and aid to democratize the adoption process
   </p>
   <a href="https://adopet.top/">
     adopet.top
@@ -22,9 +22,13 @@ These preferences are collected through a questionnaire completed during the use
 
 # Details
 
-Behind the scenes, ADOPET uses a **Feature-Weighted Content-Based Filtering** approach. Similarities between users and pets are calculated using the cosine similarity function, which measures how closely the user's profile aligns with each pet's characteristics. </br>
+Behind the scenes, ADOPET Rs uses a **Feature-Weighted Content-Based Filtering** approach. Similarities between users and pets are calculated using the cosine similarity function, which measures how closely the user's profile aligns with each pet's characteristics. </br>
 
 The user's profile vector is multiplied by a vector of feature weights to emphasize the importance of certain attributes (such as expense range, animal preference, and housing size). Additionally, features with lower-bound limits undergo a value adjustment process. This allows the system to, for example, recommend a more affordable pet even if the user initially selected a higher expense range, thus increasing the chances of successful adoption.
+
+The recommender system was tested using 50 synthetic user profiles and 200 synthetic animal profiles. We obtained a mean precision of `0.615` and a mean recall of `0.613`, indicating that the number of false positives and false negatives is nearly balanced.
+
+Further evaluations and optimization techniques will be applied, with a particular focus on improving recall. The goal is to ensure that as many relevant recommendations as possible are presented to the user, even at the cost of including some less relevant ones.
 
 # Built With
 - [**NumPy**](https://numpy.org/doc/) - Fundamental package for numerical computing with support for arrays, matrices, and mathematical operations.
@@ -35,13 +39,12 @@ The user's profile vector is multiplied by a vector of feature weights to emphas
 
 # Contributions
 
-This project and the other ones that are part of the ADOPET enviroment, were built alongside with my university collegues:
-- [**Lucas Losekann**](https://github.com/lucaslosekann)
-- [**João Fraga**](https://github.com/joaopedrofraga)
-- [**Maria Martim**](https://github.com/MariaMartim)
+This project and the other ones that are part of the ADOPET enviroment, were built alongside with my university collegues: [**Lucas Losekann**](https://github.com/lucaslosekann), [**João Fraga**](https://github.com/joaopedrofraga), [**Maria Martim**](https://github.com/MariaMartim).
+
+If you encounter a bug or wish to suggest an improvement, please create a pull request with a descriptive title and a detailed description. Clearly document what was fixed or improved, and include any relevant comments to ensure proper project documentation.
 
 # Other
-- [**Adopet Back-end**](https://github.com/lucaslosekann/adopet-backend)
-- [**Adopet Front-end**](https://github.com/lucaslosekann/adopet-frontend)
+- [**ADOPET Back-end**](https://github.com/lucaslosekann/adopet-backend)
+- [**ADOPET Front-end**](https://github.com/lucaslosekann/adopet-frontend)
 
 
